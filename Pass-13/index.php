@@ -15,10 +15,10 @@ if(isset($_POST['submit'])){
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
         } else {
-            $msg = "上传失败";
+            $msg = "Upload error";
         }
     } else {
-        $msg = "只允许上传.jpg|.png|.gif类型文件！";
+        $msg = "Only allow to upload .jpg|.png|.gif suffix file！";
     }
 }
 ?>
@@ -26,21 +26,29 @@ if(isset($_POST['submit'])){
 <div id="upload_panel">
     <ol>
         <li>
-            <h3>任务</h3>
-            <p>上传一个<code>webshell</code>到服务器。</p>
-        </li>
+            <h3>This level test point:</h3>
+            <p>Picture Trojan bypass</p>
+        </li>    
+
         <li>
-            <h3>上传区</h3>
-            <form enctype="multipart/form-data" method="post">
-                <p>请选择要上传的图片：<p>
-                <input type="hidden" name="save_path" value="../upload/"/>
+            <h3>Mission</h3>
+            <p>Upload one<code>webshell</code>to server.</p>
+            <p>Note:</p>
+            <p>1. Make sure that the uploaded image still contains <code>the complete sentence</code> or <code>webshell</code> code</p>
+            <p>2. Pictures trojan can be uploaded successfully to pass by <code>.jpg</code>,<code>.png</code>,<code>.gif</code> three suffixes!</p>
+        </li>
+
+        <li>
+            <h3>Upload area</h3>
+            <form enctype="multipart/form-data" method="post" onsubmit="return checkFile()">
+            <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
-                <input class="button" type="submit" name="submit" value="上传"/>
+                <input class="button" type="submit" name="submit" value="upload"/>
             </form>
             <div id="msg">
                 <?php 
                     if($msg != null){
-                        echo "提示：".$msg;
+                        echo "Tip：".$msg;
                     }
                 ?>
             </div>

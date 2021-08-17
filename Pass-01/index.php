@@ -12,10 +12,10 @@ if (isset($_POST['submit'])) {
         if (move_uploaded_file($temp_file, $img_path)){
             $is_upload = true;
         } else {
-            $msg = '上传出错！';
+            $msg = 'Upload error!';
         }
     } else {
-        $msg = UPLOAD_PATH . '文件夹不存在,请手工创建！';
+        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually!';
     }
 }
 ?>
@@ -23,20 +23,25 @@ if (isset($_POST['submit'])) {
 <div id="upload_panel">
     <ol>
         <li>
-            <h3>任务</h3>
-            <p>上传一个<code>webshell</code>到服务器。</p>
+            <h3>This level test point:</h3>
+            <p>Front-end validation bypass</p>
+        </li>    
+
+        <li>
+            <h3>Mission</h3>
+            <p>Upload one<code>webshell</code>to server.</p>
         </li>
         <li>
-            <h3>上传区</h3>
+            <h3>Upload area</h3>
             <form enctype="multipart/form-data" method="post" onsubmit="return checkFile()">
-                <p>请选择要上传的图片：<p>
+                <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
-                <input class="button" type="submit" name="submit" value="上传"/>
+                <input class="button" type="submit" name="submit" value="Upload"/>
             </form>
             <div id="msg">
                 <?php 
                     if($msg != null){
-                        echo "提示：".$msg;
+                        echo "Tip：".$msg;
                     }
                 ?>
             </div>
@@ -65,7 +70,7 @@ include '../footer.php'
     function checkFile() {
         var file = document.getElementsByName('upload_file')[0].value;
         if (file == null || file == "") {
-            alert("请选择要上传的文件!");
+            alert("Please select the file you want to upload!");
             return false;
         }
         //定义允许上传的文件类型
@@ -74,7 +79,7 @@ include '../footer.php'
         var ext_name = file.substring(file.lastIndexOf("."));
         //判断上传文件类型是否允许上传
         if (allow_ext.indexOf(ext_name) == -1) {
-            var errMsg = "该文件不允许上传，请上传" + allow_ext + "类型的文件,当前文件类型为：" + ext_name;
+            var errMsg = "This file is not allowed to be uploaded, please upload" + allow_ext + "types file,current file type：" + ext_name;
             alert(errMsg);
             return false;
         }

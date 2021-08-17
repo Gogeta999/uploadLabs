@@ -12,21 +12,21 @@ include 'menu.php';
 <div id="upload_panel">
     <ol>
         <li>
-            <h3>简介</h3>
-            <p><code>upload-labs</code>是一个使用<code>php</code>语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共21关，每一关都包含着不同上传方式。</p>
+            <h3>Introduction</h3>
+            <p><code>upload-labs</code>is a website that uses<code>php</code>built，A firing range dedicated to collecting the various upload vulnerabilities encountered in penetration testing and CTF. It is designed to help you have a comprehensive understanding of upload vulnerabilities. There are currently 21 levels, each containing a different upload method.</p>
         </li>
         <li>
-            <h3>注意</h3>
-            <p>1.每一关没有固定的通关方法，大家不要自限思维！</p>
-            <p>2.本项目提供的<code>writeup</code>只是起一个参考作用，希望大家可以分享出自己的通关思路。</p>
-            <p>3.实在没有思路时，可以点击<code>查看提示</code>。</p>
-            <p>4.如果黑盒情况下，实在做不出，可以点击<code>查看源码</code>。</p>
+            <h3>Note</h3>
+            <p>1.There is no fixed method for passing each level, so don't limit your own thinking!</p>
+            <p>2.This project provide<code>writeup</code>is just a example，I hope you can pass with another methos and share your ideas on how to get through.</p>
+            <p>3.When you have no idea，You can click<code>View tips</code>。</p>
+            <p>4.If you really can't do it，You can click<code>View Source Code</code>。</p>
         </li>
-        <li>
+        <!-- <li>
             <h3>后续</h3>
             <p>如在渗透测试实战中遇到新的上传漏洞类型，会更新到<code>upload-labs</code>中。当然如果你也希望参加到这个工作当中，欢迎<code>pull requests</code>给我!</p>
             <p>项目地址：<code>https://github.com/c0ny1/upload-labs</code></p>
-        </li>
+        </li> -->
 	</ol>
 </div>
 

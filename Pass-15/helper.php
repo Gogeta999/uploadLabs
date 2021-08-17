@@ -1,5 +1,5 @@
 <?php
 if($_GET['action'] == 'get_prompt'){
-    echo '本pass使用getimagesize()检查是否为图片文件！';
+    echo 'This pass uses getimagesize() check file is image type or not！';
 }
 ?>

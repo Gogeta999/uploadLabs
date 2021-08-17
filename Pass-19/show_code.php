@@ -1,5 +1,5 @@
 <li id="show_code">
-    <h3>index.php代码</h3>
+    <h3>index.php Code</h3>
 <pre>
 <code class="line-numbers language-php">//index.php
 $is_upload = false;
@@ -16,28 +16,28 @@ if (isset($_POST['submit']))
             $img_path = $u->cls_upload_dir . $u->cls_file_rename_to;
             break;
         case 2:
-            $msg = '文件已经被上传，但没有重命名。';
+          $msg = 'The file has been uploaded, but not renamed.';
             break; 
         case -1:
-            $msg = '这个文件不能上传到服务器的临时文件存储目录。';
+            $msg = 'This file cannot be uploaded to the server\'s temporary file storage directory.';
             break; 
         case -2:
-            $msg = '上传失败，上传目录不可写。';
+            $msg = 'Upload failed and the upload directory is not writable.';
             break; 
         case -3:
-            $msg = '上传失败，无法上传该类型文件。';
+            $msg = 'Upload failed to upload a file of this type.';
             break; 
         case -4:
-            $msg = '上传失败，上传的文件过大。';
+            $msg = 'Upload failed, the uploaded file is too large.';
             break; 
         case -5:
-            $msg = '上传失败，服务器已经存在相同名称文件。';
+            $msg = 'The upload failed, the file with the same name already exists on the server.';
             break; 
         case -6:
-            $msg = '文件无法上传，文件不能复制到目标目录。';
+            $msg = 'The file cannot be uploaded and the file cannot be copied to the target directory.';
             break;      
         default:
-            $msg = '未知错误！';
+            $msg = 'Unknown error!';
             break;
     }
 }

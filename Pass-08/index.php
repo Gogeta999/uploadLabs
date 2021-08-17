@@ -10,9 +10,9 @@ if (isset($_POST['submit'])) {
         $deny_ext = array(".php",".php5",".php4",".php3",".php2",".html",".htm",".phtml",".pht",".pHp",".pHp5",".pHp4",".pHp3",".pHp2",".Html",".Htm",".pHtml",".jsp",".jspa",".jspx",".jsw",".jsv",".jspf",".jtml",".jSp",".jSpx",".jSpa",".jSw",".jSv",".jSpf",".jHtml",".asp",".aspx",".asa",".asax",".ascx",".ashx",".asmx",".cer",".aSp",".aSpx",".aSa",".aSax",".aScx",".aShx",".aSmx",".cEr",".sWf",".swf",".htaccess",".ini");
         $file_name = trim($_FILES['upload_file']['name']);
         $file_ext = strrchr($file_name, '.');
-        $file_ext = strtolower($file_ext); //转换为小写
-        $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
-        $file_ext = trim($file_ext); //首尾去空
+        $file_ext = strtolower($file_ext); //Convert to lowercase
+        $file_ext = str_ireplace('::$DATA', '', $file_ext);//Removing strings::$DATA
+        $file_ext = trim($file_ext); //Wrapping up to empty
         
         if (!in_array($file_ext, $deny_ext)) {
             $temp_file = $_FILES['upload_file']['tmp_name'];
@@ -20,13 +20,13 @@ if (isset($_POST['submit'])) {
             if (move_uploaded_file($temp_file, $img_path)) {
                 $is_upload = true;
             } else {
-                $msg = '上传出错！';
+                $msg = 'Upload error！';
             }
         } else {
-            $msg = '此文件类型不允许上传！';
+            $msg = 'This file type is not allowed to be uploaded!';
         }
     } else {
-        $msg = UPLOAD_PATH . '文件夹不存在,请手工创建！';
+        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually！';
     }
 }
 ?>
@@ -34,20 +34,26 @@ if (isset($_POST['submit'])) {
 <div id="upload_panel">
     <ol>
         <li>
-            <h3>任务</h3>
-            <p>上传一个<code>webshell</code>到服务器。</p>
-        </li>
+            <h3>This level test point:</h3>
+            <p>::$DATA (Windows file stream bypass)</p>
+        </li>    
+
         <li>
-            <h3>上传区</h3>
+            <h3>Mission</h3>
+            <p>Upload one<code>webshell</code>to server.</p>
+        </li>
+
+        <li>
+            <h3>Upload area</h3>
             <form enctype="multipart/form-data" method="post" onsubmit="return checkFile()">
-                <p>请选择要上传的图片：<p>
+            <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
-                <input class="button" type="submit" name="submit" value="上传"/>
+                <input class="button" type="submit" name="submit" value="upload"/>
             </form>
             <div id="msg">
                 <?php 
                     if($msg != null){
-                        echo "提示：".$msg;
+                        echo "Tip：".$msg;
                     }
                 ?>
             </div>

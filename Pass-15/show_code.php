@@ -1,5 +1,5 @@
 <li id="show_code">
-    <h3>代码</h3>
+    <h3>Code</h3>
 <pre>
 <code class="line-numbers language-php">function isImage($filename){
     $types = '.jpeg|.png|.gif';
@@ -22,13 +22,13 @@ if(isset($_POST['submit'])){
     $temp_file = $_FILES['upload_file']['tmp_name'];
     $res = isImage($temp_file);
     if(!$res){
-        $msg = "文件未知，上传失败！";
+        $msg = "File Type Unknown，Upload Error！";
     }else{
         $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").$res;
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
         } else {
-            $msg = "上传出错！";
+            $msg = "Upload error!";
         }
     }
 }

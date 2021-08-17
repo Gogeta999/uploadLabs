@@ -1,1 +1,1 @@
-<?php echo "该目录是上传文件保存，该文件为系统说明文件，请勿删除！";?>
+<?php echo "This directory is for uploading files to save, this file is the system description file, please do not delete！";?>

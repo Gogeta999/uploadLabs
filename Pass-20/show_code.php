@@ -1,5 +1,5 @@
 <li id="show_code">
-    <h3>代码</h3>
+    <h3>Code</h3>
 <pre>
 <code class="line-numbers language-php">$is_upload = false;
 $msg = null;
@@ -16,14 +16,14 @@ if (isset($_POST['submit'])) {
             if (move_uploaded_file($temp_file, $img_path)) { 
                 $is_upload = true;
             }else{
-                $msg = '上传出错！';
+                $msg = 'Upload error！';
             }
         }else{
-            $msg = '禁止保存为该类型文件！';
+            $msg = 'Save as a file of this type is prohibited!';
         }
 
     } else {
-        $msg = UPLOAD_PATH . '文件夹不存在,请手工创建！';
+        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually!';
     }
 }
 </code>

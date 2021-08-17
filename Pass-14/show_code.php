@@ -1,9 +1,9 @@
 <li id="show_code">
-    <h3>代码</h3>
+    <h3>Code</h3>
 <pre>
 <code class="line-numbers language-php">function getReailFileType($filename){
     $file = fopen($filename, "rb");
-    $bin = fread($file, 2); //只读2字节
+    $bin = fread($file, 2); //Only read 2 bytes
     fclose($file);
     $strInfo = @unpack("C2chars", $bin);    
     $typeCode = intval($strInfo['chars1'].$strInfo['chars2']);    
@@ -31,13 +31,13 @@ if(isset($_POST['submit'])){
     $file_type = getReailFileType($temp_file);
 
     if($file_type == 'unknown'){
-        $msg = "文件未知，上传失败！";
+        $msg = "Unkown File Type，Upload error！";
     }else{
         $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").".".$file_type;
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
         } else {
-            $msg = "上传出错！";
+            $msg = "Upload error！";
         }
     }
 }

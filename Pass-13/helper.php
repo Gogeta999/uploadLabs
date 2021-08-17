@@ -1,5 +1,5 @@
 <?php
 if($_GET['action'] == 'get_prompt'){
-    echo '本pass上传路径可控！';
+    echo 'This pass upload path can be controlled!';
 }
 ?>

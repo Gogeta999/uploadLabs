@@ -23,7 +23,7 @@ if (isset($_POST['submit'])){
             $im = imagecreatefromjpeg($target_path);
 
             if($im == false){
-                $msg = "该文件不是jpg格式的图片！";
+                $msg = "File is not a jpg image！";
                 @unlink($target_path);
             }else{
                 //给新图片指定文件名
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])){
                 $is_upload = true;
             }
         } else {
-            $msg = "上传出错！";
+            $msg = "Upload error！";
         }
 
     }else if(($fileext == "png") && ($filetype=="image/png")){
@@ -45,7 +45,7 @@ if (isset($_POST['submit'])){
             $im = imagecreatefrompng($target_path);
 
             if($im == false){
-                $msg = "该文件不是png格式的图片！";
+                $msg = "File is not a png image！";
                 @unlink($target_path);
             }else{
                  //给新图片指定文件名
@@ -59,7 +59,7 @@ if (isset($_POST['submit'])){
                 $is_upload = true;               
             }
         } else {
-            $msg = "上传出错！";
+            $msg = "Upload error！";
         }
 
     }else if(($fileext == "gif") && ($filetype=="image/gif")){
@@ -67,7 +67,7 @@ if (isset($_POST['submit'])){
             //使用上传的图片生成新的图片
             $im = imagecreatefromgif($target_path);
             if($im == false){
-                $msg = "该文件不是gif格式的图片！";
+                $msg = "File is not a gif image";
                 @unlink($target_path);
             }else{
                 //给新图片指定文件名
@@ -81,10 +81,10 @@ if (isset($_POST['submit'])){
                 $is_upload = true;
             }
         } else {
-            $msg = "上传出错！";
+            $msg = "Upload error！";
         }
     }else{
-        $msg = "只允许上传后缀为.jpg|.png|.gif的图片文件！";
+        $msg = "Only allow to upload .jpg|.png|.gif suffix file type！";
     }
 }
 ?>
@@ -92,24 +92,28 @@ if (isset($_POST['submit'])){
 <div id="upload_panel">
     <ol>
         <li>
-            <h3>任务</h3>
-            <p>上传<code>图片马</code>到服务器。</p>
-            <p>注意：</p>
-            <p>1.保证上传后的图片马中仍然包含完整的<code>一句话</code>或<code>webshell</code>代码。</p>
-            <p>2.使用<a href="<?php echo INC_VUL_PATH;?>" target="_bank">文件包含漏洞</a>能运行图片马中的恶意代码。</p>
-            <p>3.图片马要<code>.jpg</code>,<code>.png</code>,<code>.gif</code>三种后缀都上传成功才算过关！</p>
+            <h3>This level test point:</h3>
+            <p>Secondary rendering bypass</p>
+        </li>   
+        <li>
+            <h3>Mission</h3>
+            <p>Upload <code>picture trojan </code> to server。</p>
+            <p>Note：</p>
+            <p>1. Make sure that the uploaded image still contains <code>the complete sentence</code> or <code>webshell</code> code</p>
+            <p>2.Use <a href="<?php echo INC_VUL_PATH;?>" target="_bank"> File Inclusion Vulnerability </a>Can run the malicious code in the image trojan.</p>
+            <p>3. Pictures trojan can be uploaded successfully to pass by <code>.jpg</code>,<code>.png</code>,<code>.gif</code> three suffixes!</p>
         </li>
         <li>
-            <h3>上传区</h3>
+            <h3>Upload area</h3>
             <form enctype="multipart/form-data" method="post">
-                <p>请选择要上传的图片：<p>
+            <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
-                <input class="button" type="submit" name="submit" value="上传"/>
+                <input class="button" type="submit" name="submit" value="upload"/>
             </form>
             <div id="msg">
                 <?php 
                     if($msg != null){
-                        echo "提示：".$msg;
+                        echo "Tip：".$msg;
                     }
                 ?>
             </div>

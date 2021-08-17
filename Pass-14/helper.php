@@ -1,5 +1,5 @@
 <?php
 if($_GET['action'] == 'get_prompt'){
-    echo '本pass检查图标内容开头2个字节！';
+    echo 'This pass checks the first 2 bytes of the icon content！';
 }
 ?>
