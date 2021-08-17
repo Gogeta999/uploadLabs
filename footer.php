@@ -1,6 +1,6 @@
 </div>
 		<div id="footer">
-			<center>Copyright&nbsp;@&nbsp;2021 by Pandabase</center>
+		<center>Copyright&nbsp;@&nbsp;<span id="copyright_time"></span>&nbsp;by&nbsp;<a href="https://github.com/Gogeta999" target="_bank">pandabase</a></center>
 		</div>
 		<div class="mask"></div>
 		<div class="dialog">

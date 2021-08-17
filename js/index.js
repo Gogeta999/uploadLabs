@@ -22,9 +22,9 @@ function modify_showcode_name(){
 	var url = window.location.href;
 	var btn_showcode = document.getElementById("handle_code");
 	if(url.indexOf('show_code') >= 0){
-		btn_showcode.innerHTML = "隐藏源码";
+		btn_showcode.innerHTML = "Close Source";
 	}else{
-		btn_showcode.innerHTML = "显示源码";
+		btn_showcode.innerHTML = "Show Source";
 	}
 }
 
@@ -35,7 +35,7 @@ function get_prompt(){
 	}).success(function(data) {
 		Dialog.open(400,200,data);
 	}).error(function() {  
-		Dialog.open(400,150,"获取提示失败！");
+		Dialog.open(400,150,"Get alert failed!");
 	});
 }
 
@@ -46,13 +46,13 @@ function clean_upload_file(){
 	}).success(function(data) {
 		Dialog.open(400,200,data);
 	}).error(function() {
-		Dialog.open(400,150,"删除失败！");
+		Dialog.open(400,150,"Delete failed！");
 	}); 
 }
 
 function update_copyright_time(){
 	var mydate = new Date();
-	var now_time = '2018 ~ ' + mydate.getFullYear();
+	var now_time = '2021 ~ ' + mydate.getFullYear();
 	var copyright_time = document.getElementById("copyright_time");
 	copyright_time.innerHTML = now_time;
 }
