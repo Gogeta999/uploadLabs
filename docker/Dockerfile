@@ -1,6 +1,5 @@
 FROM php:5.5-apache
 
-MAINTAINER c0ny1 <root@gv7.me>
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
 
@@ -23,9 +22,9 @@ RUN apt-get update && \
 
 # install upload-labs
 RUN cd /tmp/ &&\
-    git clone https://github.com/c0ny1/upload-labs.git &&\
+    git clone https://github.com/Gogeta999/uploadLabs.git &&\
     rm -rf /var/wwww/html/* &&\
-    mv /tmp/upload-labs/* /var/www/html/ &&\
+    mv /tmp/uploadLabs/* /var/www/html/ &&\
     chown www-data:www-data -R /var/www/html/ && \
     rm -rf /tmp/*
 
