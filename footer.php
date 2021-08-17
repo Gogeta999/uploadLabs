@@ -4,7 +4,7 @@
 		</div>
 		<div class="mask"></div>
 		<div class="dialog">
-		    <div class="dialog-title">View&nbsp;Tips<a href="javascript:void(0)" class="close" title="关闭">Close</a></div>
+		    <div class="dialog-title">View&nbsp;Tips<a href="javascript:void(0)" class="close" title="Close">Close</a></div>
 		    <div class="dialog-content"></div>
 		</div>		
 </body>
