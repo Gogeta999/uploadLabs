@@ -14,6 +14,7 @@ RUN cp /tmp/docker-php.conf /etc/apache2/conf-available/docker-php.conf &&\
 RUN apt-get update && \
     apt-get install -y libgd-dev &&\
     apt-get install -y git &&\
+    apt-get install -y vim &&\
     docker-php-ext-install gd &&\
     docker-php-ext-enable gd &&\
     docker-php-ext-install exif &&\
