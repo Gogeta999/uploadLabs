@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         $file_name = trim($_FILES['upload_file']['name']);
         $file_name = deldot($file_name);//删除文件名末尾的点
         $file_ext = strrchr($file_name, '.');
-        $file_ext = strtolower($file_ext); //转换为小写
+        //$file_ext = strtolower($file_ext); //转换为小写
         $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
         $file_ext = trim($file_ext); //首尾去空
         
