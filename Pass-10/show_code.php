@@ -1,7 +1,8 @@
 <li id="show_code">
     <h3>Code</h3>
 <pre>
-<code class="line-numbers language-php">$is_upload = false;
+<code class="line-numbers language-php">
+$is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
     if (file_exists($UPLOAD_ADDR)) {
