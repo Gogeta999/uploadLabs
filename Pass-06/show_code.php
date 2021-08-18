@@ -11,7 +11,6 @@ if (isset($_POST['submit'])) {
         $file_ext = strrchr($file_name, '.');
         $file_ext = strtolower($file_ext); //Convert to lowercase
         $file_ext = str_ireplace('::$DATA', '', $file_ext);//Removing strings::$DATA
-        $file_ext = trim($file_ext); //Wrapping up to empty
 
         if (!in_array($file_ext, $deny_ext)) {
             $temp_file = $_FILES['upload_file']['tmp_name'];
