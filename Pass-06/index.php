@@ -19,8 +19,8 @@ if (isset($_POST['submit'])) {
         if (!in_array($file_ext, $deny_ext)) {
             // $temp_file = $_FILES['upload_file']['tmp_name'];
             // $img_path = UPLOAD_PATH.'/'.date("YmdHis").rand(1000,9999).$file_ext;
-            if (move_uploaded_file($_FILES['upload_file']['tmp_name'], $UPLOAD_ADDR . '/' . $_FILES['upload_file']['name'])) {
-                $img_path = $UPLOAD_ADDR . '/' . $file_name;
+            if (move_uploaded_file($_FILES['upload_file']['tmp_name'], UPLOAD_PATH . '/' . $_FILES['upload_file']['name'])) {
+                $img_path = UPLOAD_PATH . '/' . $file_name;
                 $is_upload = true;
             }
             } else {
