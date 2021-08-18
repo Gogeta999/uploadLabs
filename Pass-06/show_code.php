@@ -1,7 +1,8 @@
 <li id="show_code">
     <h3>Code</h3>
 <pre>
-<code class="line-numbers language-php">$is_upload = false;
+<code class="line-numbers language-php">
+$is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
     if (file_exists(UPLOAD_PATH)) {
@@ -13,10 +14,10 @@ if (isset($_POST['submit'])) {
         $file_ext = str_ireplace('::$DATA', '', $file_ext);//Removing strings::$DATA
 
         if (!in_array($file_ext, $deny_ext)) {
-            $temp_file = $_FILES['upload_file']['tmp_name'];
-            $img_path = UPLOAD_PATH.'/'.date("YmdHis").rand(1000,9999).$file_ext;
-            if (move_uploaded_file($temp_file, $img_path)) {
+            if (move_uploaded_file($_FILES['upload_file']['tmp_name'], $UPLOAD_ADDR . '/' . $_FILES['upload_file']['name'])) {
+                $img_path = $UPLOAD_ADDR . '/' . $file_name;
                 $is_upload = true;
+            }
             } else {
                 $msg = 'Upload error！';
             }
@@ -26,7 +27,6 @@ if (isset($_POST['submit'])) {
     } else {
         $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually！';
     }
-}
 </code>
 </pre>
 </li>

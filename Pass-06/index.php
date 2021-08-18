@@ -12,14 +12,17 @@ if (isset($_POST['submit'])) {
         $file_name = trim($_FILES['upload_file']['name']);
         $file_name = deldot($file_name);//删除文件名末尾的点
         $file_ext = strrchr($file_name, '.');
+        $file_ext = strtolower($file_ext); //Convert to lowercase
         $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
         //$file_ext = trim($file_ext); //首尾去空
 
         if (!in_array($file_ext, $deny_ext)) {
-            $temp_file = $_FILES['upload_file']['tmp_name'];
-            $img_path = UPLOAD_PATH.'/'.date("YmdHis").rand(1000,9999).$file_ext;
-            if (move_uploaded_file($temp_file, $img_path)) {
+            // $temp_file = $_FILES['upload_file']['tmp_name'];
+            // $img_path = UPLOAD_PATH.'/'.date("YmdHis").rand(1000,9999).$file_ext;
+            if (move_uploaded_file($_FILES['upload_file']['tmp_name'], $UPLOAD_ADDR . '/' . $_FILES['upload_file']['name'])) {
+                $img_path = $UPLOAD_ADDR . '/' . $file_name;
                 $is_upload = true;
+            }
             } else {
                 $msg = 'Upload error！';
             }
@@ -29,7 +32,7 @@ if (isset($_POST['submit'])) {
     } else {
         $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually！';
     }
-}
+// }
 ?>
 
 <div id="upload_panel">
