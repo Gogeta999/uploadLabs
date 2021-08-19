@@ -18,15 +18,13 @@ if (isset($_POST['submit'])) {
                 $img_path = UPLOAD_PATH . '/' . $file_name;
                 $is_upload = true;
             }
-            } else {
-                $msg = 'Upload error！';
-            }
         } else {
             $msg = 'This file type is not allowed to be uploaded!';
         }
     } else {
         $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually！';
     }
+}
 </code>
 </pre>
 </li>

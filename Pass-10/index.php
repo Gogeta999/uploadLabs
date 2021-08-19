@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
         // $file_name = deldot($file_name);//删除文件名末尾的点
         // $file_ext = strrchr($file_name, '.');
         // $file_ext = strtolower($file_ext); //转换为小写
-        $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
+        $file_name = str_ireplace('::$DATA', '', $file_name);//去除字符串::$DATA
         // $file_ext = trim($file_ext); //首尾去空
         if (move_uploaded_file($_FILES['upload_file']['tmp_name'], UPLOAD_PATH . '/' . $file_name)) {
             $img_path = UPLOAD_PATH . '/' .$file_name;
