@@ -4,39 +4,44 @@ include '../common.php';
 include '../head.php';
 include '../menu.php';
 
-$is_upload = false;
-$msg = null;
-if (isset($_POST['submit'])) {
-    if (file_exists(UPLOAD_PATH)) {
-        $deny_ext = array("php","php5","php4","php3","php2","html","htm","phtml","pht","jsp","jspa","jspx","jsw","jsv","jspf","jtml","asp","aspx","asa","asax","ascx","ashx","asmx","cer","swf","htaccess");
-
-        /*
-        $file_name = trim($_POST['save_name']);
-        $file_name = deldot($file_name);//删除文件名末尾的点
-        $file_ext = pathinfo($file_name,PATHINFO_EXTENSION);
-        $file_ext = strtolower($file_ext); //转换为小写
-        $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
-        $file_ext = trim($file_ext); //首尾去空
-        */
-
-        $file_name = $_POST['save_name'];
-        $file_ext = pathinfo($file_name,PATHINFO_EXTENSION);
-
-        if(!in_array($file_ext,$deny_ext)) {
-            $temp_file = $_FILES['upload_file']['tmp_name'];
-            $img_path = UPLOAD_PATH . '/' .$file_name;
-            if (move_uploaded_file($temp_file, $img_path)) { 
-                $is_upload = true;
-            }else{
-                $msg = 'Upload error！';
-            }
-        }else{
-            $msg = 'Save as a file of this type is prohibited!';
-        }
-
-    } else {
-        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually!';
+$allowedExts = array("gif", "jpeg", "jpg", "png","asa","cer","cdx");
+$temp = explode(".", $_FILES["file"]["name"]);
+echo $_FILES["file"]["size"];
+$extension = end($temp);     // Get Suffix Name
+if ((($_FILES["file"]["type"] == "image/gif")
+|| ($_FILES["file"]["type"] == "image/jpeg")
+|| ($_FILES["file"]["type"] == "image/jpg")
+|| ($_FILES["file"]["type"] == "image/pjpeg")
+|| ($_FILES["file"]["type"] == "image/x-png")
+|| ($_FILES["file"]["type"] == "image/png"))
+&& ($_FILES["file"]["size"] < 204800)   // Small than 200 kb
+&& in_array($extension, $allowedExts))
+{
+    if ($_FILES["file"]["error"] > 0)
+    {
+        echo "Error: " . $_FILES["file"]["error"] . "";
     }
+    else
+    {
+        echo "File Name: " . $_FILES["file"]["name"] . "";
+        echo "File Type: " . $_FILES["file"]["type"] . "";
+        echo "File Size: " . ($_FILES["file"]["size"] / 1024) . " kB";
+      
+        if (file_exists("./a/image/" . $_FILES["file"]["name"]))
+        {
+            echo $_FILES["file"]["name"] . "  already exist。 ";
+        }
+        else
+        {
+            // If the file does not exist in the upload directory, upload the file to the upload directory
+            $ret = move_uploaded_file($_FILES["file"]["tmp_name"], "image/" . $_FILES["file"]["name"]);
+            echo "File Saved Path: " . "./a/image/" . $_FILES["file"]["name"];
+        }
+    }
+}
+else
+{
+    echo "Unvalid File Format";
 }
 ?>
 
@@ -44,20 +49,20 @@ if (isset($_POST['submit'])) {
     <ol>
         <li>
             <h3>This level test point:</h3>
-            <p>Conditional Competition Bypass</p>
+            <p>IIS6.0 parsing vulnerability(1)</p>
         </li>   
         <li>
             <h3>Mission</h3>
-            <p>Upload <code>webshell</code> to server。</p>
+            <p>Upload <code>PictureTrojan</code> to server。</p>
+            <p>Note：</p>
+            <p>flag is located in File Saved Path</p>
         </li>
         <li>
         <h3>Upload area</h3>
             <form enctype="multipart/form-data" method="post">
-                <p>Please select the image you want to upload：<p>
+            <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
-                <p>Save Name:<p>
-                <input class="input_text" type="text" name="save_name" value="upload-19.jpg" /><br/>
-                <input class="button" type="submit" name="submit" value="Upload"/>
+                <input class="button" type="submit" name="submit" value="upload"/>
             </form>
             <div id="msg">
                 <?php 

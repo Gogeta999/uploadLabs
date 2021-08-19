@@ -1,7 +1,8 @@
 <li id="show_code">
     <h3>Code</h3>
 <pre>
-<code class="line-numbers language-php">$is_upload = false;
+<code class="line-numbers language-php">
+$is_upload = false;
 $msg = null;
 if(isset($_POST['submit'])){
     $ext_arr = array('jpg','png','gif');
@@ -15,7 +16,8 @@ if(isset($_POST['submit'])){
         } else {
             $msg = 'Upload error！';
         }
-    } else{
+    } 
+    else{
         $msg = "Only allow to upload .jpg|.png|.gif suffix file type！";
     }
 }

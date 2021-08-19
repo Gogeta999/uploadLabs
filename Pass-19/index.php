@@ -1,65 +1,53 @@
 <?php
 include '../config.php';
+include '../common.php';
 include '../head.php';
 include '../menu.php';
 
 $is_upload = false;
 $msg = null;
-if (isset($_POST['submit']))
-{
-    require_once("./myupload.php");
-    $imgFileName =time();
-    $u = new MyUpload($_FILES['upload_file']['name'], $_FILES['upload_file']['tmp_name'], $_FILES['upload_file']['size'],$imgFileName);
-    $status_code = $u->upload(UPLOAD_PATH);
-    switch ($status_code) {
-        case 1:
-            $is_upload = true;
-            $img_path = $u->cls_upload_dir . $u->cls_file_rename_to;
-            break;
-        case 2:
-            $msg = 'The file has been uploaded, but not renamed.';
-            break; 
-        case -1:
-            $msg = 'This file cannot be uploaded to the server\'s temporary file storage directory.';
-            break; 
-        case -2:
-            $msg = 'Upload failed and the upload directory is not writable.';
-            break; 
-        case -3:
-            $msg = 'Upload failed to upload a file of this type.';
-            break; 
-        case -4:
-            $msg = 'Upload failed, the uploaded file is too large.';
-            break; 
-        case -5:
-            $msg = 'The upload failed, the file with the same name already exists on the server.';
-            break; 
-        case -6:
-            $msg = 'The file cannot be uploaded and the file cannot be copied to the target directory.';
-            break;      
-        default:
-            $msg = 'Unknown error!';
-            break;
+if (isset($_POST['submit'])) {
+    if (file_exists(UPLOAD_PATH)) {
+        $deny_ext = array("php","php5","php4","php3","php2","html","htm","phtml","pht","jsp","jspa","jspx","jsw","jsv","jspf","jtml","asp","aspx","asa","asax","ascx","ashx","asmx","cer","swf","htaccess");
+
+        $file_name = $_POST['save_name'];
+        $file_ext = pathinfo($file_name,PATHINFO_EXTENSION);
+
+        if(!in_array($file_ext,$deny_ext)) {
+            $img_path = UPLOAD_PATH . '/' .$file_name;
+            if (move_uploaded_file($_FILES['upload_file']['tmp_name'], $img_path)) { 
+                $is_upload = true;
+            }else{
+                $msg = 'Upload Failed！';
+            }
+        }else{
+            $msg = 'Save file as this type is prohibited!';
+        }
+
+    } else {
+        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually!';
     }
 }
 ?>
 
 <div id="upload_panel">
     <ol>
-    <li>
+        <li>
             <h3>This level test point:</h3>
-            <p>Conditional Competition Bypass(2)</p>
+            <p>move_uploaded_file() truncation Bypass</p>
         </li>   
         <li>
             <h3>Mission</h3>
             <p>Upload <code>webshell</code> to server。</p>
         </li>
         <li>
-            <h3>Upload area</h3>
+        <h3>Upload area</h3>
             <form enctype="multipart/form-data" method="post">
-            <p>Please select the image you want to upload：<p>
+                <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
-                <input class="button" type="submit" name="submit" value="upload"/>
+                <p>Save Name:<p>
+                <input class="input_text" type="text" name="save_name" value="upload-19.jpg" /><br/>
+                <input class="button" type="submit" name="submit" value="Upload"/>
             </form>
             <div id="msg">
                 <?php 

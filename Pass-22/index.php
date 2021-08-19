@@ -4,7 +4,8 @@ include '../common.php';
 include '../head.php';
 include '../menu.php';
 
-$allowedExts = array("gif", "jpeg", "jpg", "png");
+$allowedExts = array("jpg");
+$time = time();
 $temp = explode(".", $_FILES["file"]["name"]);
 echo $_FILES["file"]["size"];
 $extension = end($temp);     // Get Suffix Name
@@ -14,7 +15,7 @@ if ((($_FILES["file"]["type"] == "image/gif")
 || ($_FILES["file"]["type"] == "image/pjpeg")
 || ($_FILES["file"]["type"] == "image/x-png")
 || ($_FILES["file"]["type"] == "image/png"))
-&& ($_FILES["file"]["size"] < 204800)   // Small than 200 kb
+&& ($_FILES["file"]["size"] < 204800)   // Smaller than 200 kb
 && in_array($extension, $allowedExts))
 {
     if ($_FILES["file"]["error"] > 0)
@@ -26,17 +27,17 @@ if ((($_FILES["file"]["type"] == "image/gif")
         echo "File Name: " . $_FILES["file"]["name"] . "";
         echo "File Type: " . $_FILES["file"]["type"] . "";
         echo "File Size: " . ($_FILES["file"]["size"] / 1024) . " kB";
-    
-        if (file_exists("./b/image/" . $_FILES["file"]["name"]))
+      
+        if (file_exists("C:/Inetpub/wwwroot/c/image/a.asp/" .$time.".jpg"))
         {
-            echo $_FILES["file"]["name"] . "  already exist。 ";
+            echo $_FILES["file"]["name"] . " already exist. ";
         }
         else
         {
             // If the file does not exist in the upload directory, upload the file to the upload directory
-            $ret = move_uploaded_file($_FILES["file"]["tmp_name"], "image/" . $_FILES["file"]["name"]);
-            echo "File Saved Path: " . "./b/image/" . $_FILES["file"]["name"];
-	    echo "";
+            $ret = move_uploaded_file($_FILES["file"]["tmp_name"], "image/a.asp/".$time.".jpg");
+            echo "File Saved Path: " . "./c/image/a.asp/".$time.".jpg";
+            echo "";
         }
     }
 }
@@ -51,7 +52,7 @@ else
     <ol>
         <li>
             <h3>This level test point:</h3>
-            <p>IIS6.0 parsing vulnerability(2)</p>
+            <p>IIS6.0 parsing vulnerability(3)</p>
         </li>   
         <li>
             <h3>Mission</h3>

@@ -4,17 +4,21 @@ include '../head.php';
 include '../menu.php';
 
 function isImage($filename){
-    $types = '.jpeg|.png|.gif';
-    if(file_exists($filename)){
-        $info = getimagesize($filename);
-        $ext = image_type_to_extension($info[2]);
-        if(stripos($types,$ext)>=0){
-            return $ext;
-        }else{
+    //Require php_exif module
+    $image_type = exif_imagetype($filename);
+    switch ($image_type) {
+        case IMAGETYPE_GIF:
+            return "gif";
+            break;
+        case IMAGETYPE_JPEG:
+            return "jpg";
+            break;
+        case IMAGETYPE_PNG:
+            return "png";
+            break;    
+        default:
             return false;
-        }
-    }else{
-        return false;
+            break;
     }
 }
 
@@ -24,13 +28,14 @@ if(isset($_POST['submit'])){
     $temp_file = $_FILES['upload_file']['tmp_name'];
     $res = isImage($temp_file);
     if(!$res){
-        $msg = "File Type Unknown，Upload Error!";
+        $msg = "Unkown file type，Upload failed！";
     }else{
-        $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").$res;
+        $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").".".$res;
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
-        } else {
-            $msg = "Upload error！";
+        }
+        else{
+            $msg = "Upload Failed";
         }
     }
 }
@@ -40,7 +45,7 @@ if(isset($_POST['submit'])){
     <ol>
         <li>
             <h3>This level test point:</h3>
-            <p>getimagesize image type bypass</p>
+            <p>php_exif module image type bypass</p>
         </li>   
 
         <li>
@@ -48,8 +53,7 @@ if(isset($_POST['submit'])){
             <p>Upload <code>picture trojan </code> to server。</p>
             <p>Note：</p>
             <p>1. Make sure that the uploaded image still contains <code>the complete sentence</code> or <code>webshell</code> code</p>
-            <p>2.Use <a href="<?php echo INC_VUL_PATH;?>" target="_bank"> File Inclusion Vulnerability </a>Can run the malicious code in the image trojan.</p>
-            <p>3. Pictures trojan can be uploaded successfully to pass by <code>.jpg</code>,<code>.png</code>,<code>.gif</code> three suffixes!</p>
+            <p>2. Pictures trojan can be uploaded successfully to pass by <code>.jpg</code>,<code>.png</code>,<code>.gif</code> three suffixes!</p>
         </li>
         <li>
             <h3>Upload area</h3>

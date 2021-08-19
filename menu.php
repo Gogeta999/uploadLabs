@@ -21,5 +21,7 @@
 		<li><a id="Pass-19" href="<?php echo APP_URL_ROOT;?>/Pass-19/index.php">Pass-19</a></li>
 		<li><a id="Pass-20" href="<?php echo APP_URL_ROOT;?>/Pass-20/index.php">Pass-20</a></li>
         <li><a id="Pass-21" href="<?php echo APP_URL_ROOT;?>/Pass-21/index.php">Pass-21</a></li>
+		<li><a id="Pass-22" href="<?php echo APP_URL_ROOT;?>/Pass-22/index.php">Pass-22</a></li>
+		<li><a id="Pass-23" href="<?php echo APP_URL_ROOT;?>/Pass-23/index.php">Pass-23</a></li>
 	</ul> 
 </div>

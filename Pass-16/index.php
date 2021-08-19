@@ -3,39 +3,95 @@ include '../config.php';
 include '../head.php';
 include '../menu.php';
 
-function isImage($filename){
-    //需要开启php_exif模块
-    $image_type = exif_imagetype($filename);
-    switch ($image_type) {
-        case IMAGETYPE_GIF:
-            return "gif";
-            break;
-        case IMAGETYPE_JPEG:
-            return "jpg";
-            break;
-        case IMAGETYPE_PNG:
-            return "png";
-            break;    
-        default:
-            return false;
-            break;
-    }
-}
-
 $is_upload = false;
 $msg = null;
-if(isset($_POST['submit'])){
-    $temp_file = $_FILES['upload_file']['tmp_name'];
-    $res = isImage($temp_file);
-    if(!$res){
-        $msg = "File Type Unknown，Upload Error！";
-    }else{
-        $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").".".$res;
-        if(move_uploaded_file($temp_file,$img_path)){
-            $is_upload = true;
-        } else {
-            $msg = "Upload Error！";
+if (isset($_POST['submit'])){
+    // Get basic information about the uploaded file, file name, type, size, temporary file path
+    $filename = $_FILES['upload_file']['name'];
+    $filetype = $_FILES['upload_file']['type'];
+    $tmpname = $_FILES['upload_file']['tmp_name'];
+
+    $target_path=UPLOAD_PATH.basename($filename);
+
+    // Get ext name
+    $fileext= substr(strrchr($filename,"."),1);
+
+    //Check Image Suffix type to know valid or not
+    if(($fileext == "jpg") && ($filetype=="image/jpeg")){
+        if(move_uploaded_file($tmpname,$target_path))
+        {
+            //Use uploaded image to create same but new image to server
+            $im = imagecreatefromjpeg($target_path);
+
+            if($im == false){
+                $msg = "File is not a jpg image！";
+            }else{
+                //Assign a file name to a new image
+                srand(time());
+                $newfilename = strval(rand()).".jpg";
+                $newimagepath = UPLOAD_PATH.$newfilename;
+                imagejpeg($im,$newimagepath);
+                //display secondary rendered images (new images generated using user uploaded images)                $img_path = UPLOAD_PATH.'/'.$newfilename;
+                $img_path = UPLOAD_PATH.$newfilename;
+                unlink($target_path);
+                $is_upload = true;
+            }
         }
+        else
+        {
+            $msg = "Upload Failed";
+        }
+
+    }else if(($fileext == "png") && ($filetype=="image/png")){
+        if(move_uploaded_file($tmpname,$target_path))
+        {
+            //Use uploaded image to create same but new image to server
+            $im = imagecreatefrompng($target_path);
+
+            if($im == false){
+                $msg = "File is not a png image！";
+            }else{
+                //Assign a file name to a new image
+                srand(time());
+                $newfilename = strval(rand()).".png";
+                $newimagepath = UPLOAD_PATH.$newfilename;
+                imagepng($im,$newimagepath);
+                //display secondary rendered images (new images generated using user uploaded images)                $img_path = UPLOAD_PATH.'/'.$newfilename;
+                $img_path = UPLOAD_PATH.$newfilename;
+                unlink($target_path);
+                $is_upload = true;               
+            }
+        }
+        else
+        {
+            $msg = "Upload Failed！";
+        }
+
+    }else if(($fileext == "gif") && ($filetype=="image/gif")){
+        if(move_uploaded_file($tmpname,$target_path))
+        {
+            //Use uploaded image to create same but new image to server
+            $im = imagecreatefromgif($target_path);
+            if($im == false){
+                $msg = "File is not a gif image！";
+            }else{
+                //Assign a file name to a new image
+                srand(time());
+                $newfilename = strval(rand()).".gif";
+                $newimagepath = UPLOAD_PATH.$newfilename;
+                imagegif($im,$newimagepath);
+                //display secondary rendered images (new images generated using user uploaded images)                $img_path = UPLOAD_PATH.'/'.$newfilename;
+                $img_path = UPLOAD_PATH.$newfilename;
+                unlink($target_path);
+                $is_upload = true;
+            }
+        }
+        else
+        {
+            $msg = "Upload Failed";
+        }
+    }else{
+        $msg = "Only allow to upload .jpg|.png|.gif suffix file type！";
     }
 }
 ?>
@@ -44,15 +100,14 @@ if(isset($_POST['submit'])){
     <ol>
         <li>
             <h3>This level test point:</h3>
-            <p>php_exif module image type bypass</p>
+            <p>Rendering bypass</p>
         </li>   
         <li>
             <h3>Mission</h3>
             <p>Upload <code>picture trojan </code> to server。</p>
             <p>Note：</p>
             <p>1. Make sure that the uploaded image still contains <code>the complete sentence</code> or <code>webshell</code> code</p>
-            <p>2.Use <a href="<?php echo INC_VUL_PATH;?>" target="_bank"> File Inclusion Vulnerability </a>Can run the malicious code in the image trojan.</p>
-            <p>3. Pictures trojan can be uploaded successfully to pass by <code>.jpg</code>,<code>.png</code>,<code>.gif</code> three suffixes!</p>
+            <p>2. Pictures trojan can be uploaded successfully to pass by <code>.jpg</code>,<code>.png</code>,<code>.gif</code> three suffixes!</p>
         </li>
         <li>
             <h3>Upload area</h3>

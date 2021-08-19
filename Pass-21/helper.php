@@ -1,5 +1,5 @@
 <?php
 if($_GET['action'] == 'get_prompt'){
-    echo 'Pass-20 source from CTF, please audit the code！';
+    echo 'You can bypass authentication by playing file name';
 }
 ?>

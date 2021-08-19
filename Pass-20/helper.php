@@ -1,5 +1,5 @@
 <?php
 if($_GET['action'] == 'get_prompt'){
-    echo 'The fetch file name of this pass is obtained via $_POST.';
+    echo 'Some file formats will be parsed as asp in iis 6.0';
 }
 ?>

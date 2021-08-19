@@ -5,21 +5,22 @@ include '../menu.php';
 
 $is_upload = false;
 $msg = null;
-if (isset($_POST['submit'])) {
-    if (file_exists(UPLOAD_PATH)) {
-        $deny_ext = array("php","php5","php4","php3","php2","html","htm","phtml","pht","jsp","jspa","jspx","jsw","jsv","jspf","jtml","asp","aspx","asa","asax","ascx","ashx","asmx","cer","swf","htaccess","ini");
-
-        $file_name = trim($_FILES['upload_file']['name']);
-        $file_name = str_ireplace($deny_ext,"", $file_name);
+if(isset($_POST['submit'])){
+    $ext_arr = array('jpg','png','gif');
+    $file_ext = substr($_FILES['upload_file']['name'],strrpos($_FILES['upload_file']['name'],".")+1);
+    if(in_array($file_ext,$ext_arr)){
         $temp_file = $_FILES['upload_file']['tmp_name'];
-        $img_path = UPLOAD_PATH.'/'.$file_name;        
-        if (move_uploaded_file($temp_file, $img_path)) {
+        $img_path = $_GET['save_path']."/".rand(10, 99).date("YmdHis").".".$file_ext;
+
+        if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
-        } else {
-            $msg = 'Upload error!';
         }
-    } else {
-        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually！';
+        else{
+            $msg = 'Upload Failed！';
+        }
+    }
+    else{
+        $msg = "Only allow to upload .jpg|.png|.gif suffix file！";
     }
 }
 ?>
