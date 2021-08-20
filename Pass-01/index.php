@@ -6,16 +6,13 @@ include '../menu.php';
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
-    if (file_exists(UPLOAD_PATH)) {
-        $temp_file = $_FILES['upload_file']['tmp_name'];
-        $img_path = UPLOAD_PATH . '/' . $_FILES['upload_file']['name'];
-        if (move_uploaded_file($temp_file, $img_path)){
+    if (file_exists($UPLOAD_ADDR)) {
+        if (move_uploaded_file($_FILES['upload_file']['tmp_name'], $UPLOAD_ADDR . '/' . $_FILES['upload_file']['name'])){
+            $img_path = $UPLOAD_ADDR . $_FILES['upload_file']['name'];
             $is_upload = true;
-        } else {
-            $msg = 'Upload error!';
         }
     } else {
-        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually!';
+        $msg = $UPLOAD_ADDR . 'Folder does not exist, please create it manually!';
     }
 }
 ?>

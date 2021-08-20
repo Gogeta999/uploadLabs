@@ -1,30 +1,29 @@
 <li id="show_code">
     <h3>Code</h3>
 <pre>
-<code class="line-numbers language-php">$is_upload = false;
+<code class="line-numbers language-php">
+$is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
-    if (file_exists(UPLOAD_PATH)) {
-        $deny_ext = array(".php",".php5",".php4",".php3",".php2",".html",".htm",".phtml",".pht",".pHp",".pHp5",".pHp4",".pHp3",".pHp2",".Html",".Htm",".pHtml",".jsp",".jspa",".jspx",".jsw",".jsv",".jspf",".jtml",".jSp",".jSpx",".jSpa",".jSw",".jSv",".jSpf",".jHtml",".asp",".aspx",".asa",".asax",".ascx",".ashx",".asmx",".cer",".aSp",".aSpx",".aSa",".aSax",".aScx",".aShx",".aSmx",".cEr",".sWf",".swf",".htaccess",".ini");
+    if (file_exists($UPLOAD_ADDR)) {
+        $deny_ext = array(".php",".php5",".php4",".php3",".php2",".html",".htm",".phtml",".pHp",".pHp5",".pHp4",".pHp3",".pHp2",".Html",".Htm",".pHtml",".jsp",".jspa",".jspx",".jsw",".jsv",".jspf",".jtml",".jSp",".jSpx",".jSpa",".jSw",".jSv",".jSpf",".jHtml",".asp",".aspx",".asa",".asax",".ascx",".ashx",".asmx",".cer",".aSp",".aSpx",".aSa",".aSax",".aScx",".aShx",".aSmx",".cEr",".sWf",".swf",".htaccess");
         $file_name = trim($_FILES['upload_file']['name']);
-        $file_name = deldot($file_name);//Delete the dot at the end of the file name
+        $file_name = deldot($file_name);
         $file_ext = strrchr($file_name, '.');
-        $file_ext = strtolower($file_ext); //Convert to lowercase
-        $file_ext = trim($file_ext); //Wrapping up to empty
+        $file_ext = strtolower($file_ext); //Conver To Small Letter
+        $file_ext = str_ireplace('::$DATA', '', $file_ext);//去除字符串::$DATA
+        $file_ext = trim($file_ext); //Clean Empty Space
         
         if (!in_array($file_ext, $deny_ext)) {
-            $temp_file = $_FILES['upload_file']['tmp_name'];
-            $img_path = UPLOAD_PATH.'/'.date("YmdHis").rand(1000,9999).$file_name;
-            if (move_uploaded_file($temp_file, $img_path)) {
+            if (move_uploaded_file($_FILES['upload_file']['tmp_name'], $UPLOAD_ADDR . '/' . $_FILES['upload_file']['name'])) {
+                $img_path = $UPLOAD_ADDR . '/' . $file_name;
                 $is_upload = true;
-            } else {
-                $msg = 'Upload error！';
             }
         } else {
-            $msg = 'This file type is not allowed to be uploaded!';
+            $msg = 'This file is not allowed to be uploaded!';
         }
     } else {
-        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually！';
+        $msg = $UPLOAD_ADDR . 'Folder does not exist, please create it manually！';
     }
 }
 </code>

@@ -5,7 +5,7 @@ include '../head.php';
 include '../menu.php';
 
 if (isset($_POST['submit'])) {
-    if (file_exists(UPLOAD_PATH)) {
+    if (file_exists($UPLOAD_ADDR)) {
         $allow_ext = array(".jpg",".jpeg",".png",".bmp",".gif");
         $file_name = trim($_FILES['upload_file']['name']);
         $file_name = deldot($file_name);//Delete dot in name's latest place
@@ -15,15 +15,15 @@ if (isset($_POST['submit'])) {
         $file_ext = trim($file_ext); //Clean Empty in file name
 
         if (in_array($file_ext, $deny_ext)) {
-            if (move_uploaded_file($_FILES['upload_file']['tmp_name'], UPLOAD_PATH . '/' . $_FILES['upload_file']['name'])) {
-                $img_path = UPLOAD_PATH . $_FILES['upload_file']['name'];
+            if (move_uploaded_file($_FILES['upload_file']['tmp_name'], $UPLOAD_ADDR . '/' . $_FILES['upload_file']['name'])) {
+                $img_path = $UPLOAD_ADDR . $_FILES['upload_file']['name'];
                 $is_upload = true;
             }
         } else {
             $msg = 'Not allow,Only allow [.jpg, .jpeg, .png, .bmp, .gif]!';
         }
     } else {
-        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually！';
+        $msg = $UPLOAD_ADDR . 'Folder does not exist, please create it manually！';
     }
 }
 

@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
     if($file_type == 'unknown'){
         $msg = "Unkown file type，Upload failed！";
     }else{
-        $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").".".$file_type;
+        $img_path = $UPLOAD_ADDR."/".rand(10, 99).date("YmdHis").".".$file_type;
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
         }

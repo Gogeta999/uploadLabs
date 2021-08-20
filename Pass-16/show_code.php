@@ -10,7 +10,7 @@ if (isset($_POST['submit'])){
     $filetype = $_FILES['upload_file']['type'];
     $tmpname = $_FILES['upload_file']['tmp_name'];
 
-    $target_path=UPLOAD_PATH.basename($filename);
+    $target_path=$UPLOAD_ADDR.basename($filename);
 
     // Get ext name
     $fileext= substr(strrchr($filename,"."),1);
@@ -28,10 +28,10 @@ if (isset($_POST['submit'])){
                 //Assign a file name to a new image
                 srand(time());
                 $newfilename = strval(rand()).".jpg";
-                $newimagepath = UPLOAD_PATH.$newfilename;
+                $newimagepath = $UPLOAD_ADDR.$newfilename;
                 imagejpeg($im,$newimagepath);
-                //display secondary rendered images (new images generated using user uploaded images)                $img_path = UPLOAD_PATH.'/'.$newfilename;
-                $img_path = UPLOAD_PATH.$newfilename;
+                //display secondary rendered images (new images generated using user uploaded images)             
+                $img_path = $UPLOAD_ADDR.$newfilename;
                 unlink($target_path);
                 $is_upload = true;
             }
@@ -53,10 +53,10 @@ if (isset($_POST['submit'])){
                 //Assign a file name to a new image
                 srand(time());
                 $newfilename = strval(rand()).".png";
-                $newimagepath = UPLOAD_PATH.$newfilename;
+                $newimagepath = $UPLOAD_ADDR.$newfilename;
                 imagepng($im,$newimagepath);
-                //display secondary rendered images (new images generated using user uploaded images)                $img_path = UPLOAD_PATH.'/'.$newfilename;
-                $img_path = UPLOAD_PATH.$newfilename;
+                //display secondary rendered images (new images generated using user uploaded images)    
+                $img_path = $UPLOAD_ADDR.$newfilename;
                 unlink($target_path);
                 $is_upload = true;               
             }
@@ -77,10 +77,10 @@ if (isset($_POST['submit'])){
                 //Assign a file name to a new image
                 srand(time());
                 $newfilename = strval(rand()).".gif";
-                $newimagepath = UPLOAD_PATH.$newfilename;
+                $newimagepath = $UPLOAD_ADDR.$newfilename;
                 imagegif($im,$newimagepath);
-                //display secondary rendered images (new images generated using user uploaded images)                $img_path = UPLOAD_PATH.'/'.$newfilename;
-                $img_path = UPLOAD_PATH.$newfilename;
+                //display secondary rendered images (new images generated using user uploaded images)
+                $img_path = $UPLOAD_ADDR.$newfilename;
                 unlink($target_path);
                 $is_upload = true;
             }

@@ -2,10 +2,6 @@
 include '../config.php';
 include '../head.php';
 include '../menu.php';
-
-$is_upload = false;
-$msg = null;
-
 //index.php
 $is_upload = false;
 $msg = null;
@@ -14,7 +10,7 @@ if (isset($_POST['submit']))
     require_once("./myupload.php");
     $imgFileName =time();
     $u = new MyUpload($_FILES['upload_file']['name'], $_FILES['upload_file']['tmp_name'], $_FILES['upload_file']['size'],$imgFileName);
-    $status_code = $u->upload(UPLOAD_PATH);
+    $status_code = $u->upload($UPLOAD_ADDR);
     switch ($status_code) {
         case 1:
             $is_upload = true;
