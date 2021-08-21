@@ -37,7 +37,7 @@ if(isset($_POST['submit'])){
 
         <li>
             <h3>Upload area</h3>
-            <form enctype="multipart/form-data" method="post" onsubmit="return checkFile()">
+            <form enctype="multipart/form-data" method="post">
             <p>Please select the image you want to upload：<p>
                 <input type="hidden" name="save_path" value="../upload/"/>    
                 <input class="input_file" type="file" name="upload_file"/>
