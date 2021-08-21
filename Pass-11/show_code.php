@@ -13,12 +13,10 @@ if(isset($_POST['submit'])){
 
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
-        }
-        else{
+        } else {
             $msg = 'Upload Failed！';
         }
-    }
-    else{
+    } else{
         $msg = "Only allow to upload .jpg|.png|.gif suffix file！";
     }
 }

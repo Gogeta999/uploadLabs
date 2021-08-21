@@ -6,20 +6,23 @@ include '../menu.php';
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
-    if (file_exists($UPLOAD_ADDR)) {
-        if (move_uploaded_file($_FILES['upload_file']['tmp_name'], $UPLOAD_ADDR . '/' . $_FILES['upload_file']['name'])){
-            $img_path = $UPLOAD_ADDR . $_FILES['upload_file']['name'];
+    if (file_exists(UPLOAD_PATH)) {
+        $temp_file = $_FILES['upload_file']['tmp_name'];
+        $img_path = UPLOAD_PATH . '/' . $_FILES['upload_file']['name'];
+        if (move_uploaded_file($temp_file, $img_path)){
             $is_upload = true;
+        } else {
+            $msg = 'Upload Error!';
         }
     } else {
-        $msg = $UPLOAD_ADDR . 'Folder does not exist, please create it manually!';
+        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually!';
     }
 }
 ?>
 
 <div id="upload_panel">
     <ol>
-        <li>
+    <li>
             <h3>This level test point:</h3>
             <p>Front-end validation bypass</p>
         </li>    
@@ -31,7 +34,7 @@ if (isset($_POST['submit'])) {
         <li>
             <h3>Upload area</h3>
             <form enctype="multipart/form-data" method="post" onsubmit="return checkFile()">
-                <p>Please select the image you want to upload：<p>
+            <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
                 <input class="button" type="submit" name="submit" value="Upload"/>
             </form>

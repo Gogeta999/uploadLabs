@@ -14,12 +14,10 @@ if(isset($_POST['submit'])){
 
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
-        }
-        else{
+        } else {
             $msg = 'Upload Failed！';
         }
-    }
-    else{
+    } else{
         $msg = "Only allow to upload .jpg|.png|.gif suffix file！";
     }
 }
@@ -39,15 +37,15 @@ if(isset($_POST['submit'])){
 
         <li>
             <h3>Upload area</h3>
-            <form action="?save_path=../upload/" enctype="multipart/form-data" method="post" onsubmit="return checkFile()">
-            <p>Please select the image you want to upload：<p>
+            <form action="?save_path=../upload/" enctype="multipart/form-data" method="post">
+                <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
-                <input class="button" type="submit" name="submit" value="upload"/>
+                <input class="button" type="submit" name="submit" value="Upload"/>
             </form>
             <div id="msg">
                 <?php 
                     if($msg != null){
-                        echo "Tip：".$msg;
+                        echo "Tip:".$msg;
                     }
                 ?>
             </div>

@@ -17,7 +17,7 @@ if(isset($_POST['submit'])){
         } else {
             $msg = 'Upload error！';
         }
-    } else{
+    } else {
         $msg = "Only allow upload .jpg|.png|.gif suffix file type！";
     }
 }
@@ -37,16 +37,16 @@ if(isset($_POST['submit'])){
 
         <li>
             <h3>Upload area</h3>
-            <form enctype="multipart/form-data" method="post" onsubmit="return checkFile()">
-            <p>Please select the image you want to upload：<p>
-                <input type="hidden" name="save_path" value="../upload/"/>    
+            <form enctype="multipart/form-data" method="post">
+                <p>Please select the image you want to upload：<p>
+                <input type="hidden" name="save_path" value="../upload/"/>
                 <input class="input_file" type="file" name="upload_file"/>
-                <input class="button" type="submit" name="submit" value="upload"/>
+                <input class="button" type="submit" name="submit" value="Upload"/>
             </form>
             <div id="msg">
                 <?php 
                     if($msg != null){
-                        echo "Tip：".$msg;
+                        echo "Tip:".$msg;
                     }
                 ?>
             </div>

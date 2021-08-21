@@ -10,7 +10,7 @@ if (isset($_POST['submit']))
     require_once("./myupload.php");
     $imgFileName =time();
     $u = new MyUpload($_FILES['upload_file']['name'], $_FILES['upload_file']['tmp_name'], $_FILES['upload_file']['size'],$imgFileName);
-    $status_code = $u->upload($UPLOAD_ADDR);
+    $status_code = $u->upload(UPLOAD_PATH);
     switch ($status_code) {
         case 1:
             $is_upload = true;
@@ -59,12 +59,12 @@ if (isset($_POST['submit']))
             <form enctype="multipart/form-data" method="post">
             <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
-                <input class="button" type="submit" name="submit" value="upload"/>
+                <input class="button" type="submit" name="submit" value="Upload"/>
             </form>
             <div id="msg">
                 <?php 
                     if($msg != null){
-                        echo "Tip：".$msg;
+                        echo "Tip:".$msg;
                     }
                 ?>
             </div>

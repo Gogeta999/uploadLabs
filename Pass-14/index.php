@@ -8,7 +8,7 @@ function isImage($filename){
     if(file_exists($filename)){
         $info = getimagesize($filename);
         $ext = image_type_to_extension($info[2]);
-        if(stripos($types,$ext)){
+        if(stripos($types,$ext)>=0){
             return $ext;
         }else{
             return false;
@@ -24,14 +24,13 @@ if(isset($_POST['submit'])){
     $temp_file = $_FILES['upload_file']['tmp_name'];
     $res = isImage($temp_file);
     if(!$res){
-        $msg = "Unkown file type，Upload failed！";
+        $msg = "Unkown File Type,Upload Failed!";
     }else{
-        $img_path = $UPLOAD_ADDR."/".rand(10, 99).date("YmdHis").$res;
+        $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").$res;
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
-        }
-        else{
-            $msg = "Upload Failed";
+        } else {
+            $msg = "Upload Failed!";
         }
     }
 }
@@ -54,14 +53,14 @@ if(isset($_POST['submit'])){
         <li>
             <h3>Upload area</h3>
             <form enctype="multipart/form-data" method="post">
-            <p>Please select the image you want to upload：<p>
+                <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
-                <input class="button" type="submit" name="submit" value="upload"/>
+                <input class="button" type="submit" name="submit" value="Upload Failed!"/>
             </form>
             <div id="msg">
                 <?php 
                     if($msg != null){
-                        echo "Tip：".$msg;
+                        echo "Tip:".$msg;
                     }
                 ?>
             </div>

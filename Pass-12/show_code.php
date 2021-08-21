@@ -16,9 +16,8 @@ if(isset($_POST['submit'])){
         } else {
             $msg = 'Upload error！';
         }
-    } 
-    else{
-        $msg = "Only allow to upload .jpg|.png|.gif suffix file type！";
+    } else {
+        $msg = "Only allow upload .jpg|.png|.gif suffix file type！";
     }
 }
 </code>

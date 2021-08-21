@@ -7,7 +7,7 @@ include '../menu.php';
 $is_upload = false;
 $msg = null;
 if (isset($_POST['submit'])) {
-    if (file_exists($UPLOAD_ADDR)) {
+    if (file_exists(UPLOAD_PATH)) {
         $deny_ext = array('.asp','.aspx','.php','.jsp');
         $file_name = trim($_FILES['upload_file']['name']);
         $file_name = deldot($file_name);//Delete the dot at the end of the file name
@@ -17,15 +17,18 @@ if (isset($_POST['submit'])) {
         $file_ext = trim($file_ext); //Clean Empty Space
 
         if(!in_array($file_ext, $deny_ext)) {
-            if (move_uploaded_file($_FILES['upload_file']['tmp_name'], $UPLOAD_ADDR. '/' . $_FILES['upload_file']['name'])) {
-                 $img_path = $UPLOAD_ADDR .'/'. $_FILES['upload_file']['name'];
+            $temp_file = $_FILES['upload_file']['tmp_name'];
+            $img_path = UPLOAD_PATH.'/'.date("YmdHis").rand(1000,9999).$file_ext;            
+            if (move_uploaded_file($temp_file,$img_path)) {
                  $is_upload = true;
+            } else {
+                $msg = 'Upload Failed!';
             }
         } else {
-            $msg = 'Upload not allowed .asp,.aspx,.php,.jsp suffix files！';
+            $msg = 'Upload not allowed .asp,.aspx,.php,.jsp suffix files!';
         }
     } else {
-        $msg = $UPLOAD_ADDR . 'Folder does not exist, please create it manually！';
+        $msg = UPLOAD_PATH . 'Folder does not exist, please create it manually！';
     }
 }
 ?>
@@ -50,7 +53,7 @@ if (isset($_POST['submit'])) {
             <div id="msg">
                 <?php 
                     if($msg != null){
-                        echo "Tip：".$msg;
+                        echo "Tip:".$msg;
                     }
                 ?>
             </div>

@@ -30,11 +30,10 @@ if(isset($_POST['submit'])){
     if(!$res){
         $msg = "Unkown file type，Upload failed！";
     }else{
-        $img_path = $UPLOAD_ADDR."/".rand(10, 99).date("YmdHis").".".$res;
+        $img_path = UPLOAD_PATH."/".rand(10, 99).date("YmdHis").".".$res;
         if(move_uploaded_file($temp_file,$img_path)){
             $is_upload = true;
-        }
-        else{
+        } else {
             $msg = "Upload Failed";
         }
     }
@@ -60,12 +59,12 @@ if(isset($_POST['submit'])){
             <form enctype="multipart/form-data" method="post">
             <p>Please select the image you want to upload：<p>
                 <input class="input_file" type="file" name="upload_file"/>
-                <input class="button" type="submit" name="submit" value="upload"/>
+                <input class="button" type="submit" name="submit" value="上传"/>
             </form>
             <div id="msg">
                 <?php 
                     if($msg != null){
-                        echo "Tip：".$msg;
+                        echo "Tip:".$msg;
                     }
                 ?>
             </div>

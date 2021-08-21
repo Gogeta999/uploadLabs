@@ -1,1 +1,0 @@
-<?php echo "This directory is for uploading files to save, this file is the system description file, please do not delete！";?>
