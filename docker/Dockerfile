@@ -1,4 +1,4 @@
-FROM php:5.3.29-apache
+FROM php:5.5-apache
 
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
