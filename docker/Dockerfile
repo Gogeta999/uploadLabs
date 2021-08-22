@@ -1,4 +1,4 @@
-FROM orsolin/docker-php-5.3-apache
+FROM mindk/php5.3.29-apache:latest
 
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
