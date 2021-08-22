@@ -1,4 +1,4 @@
-FROM orsolin/docker-php-5.3-apache:latest
+FROM orsolin/docker-php-5.3-apache
 
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
