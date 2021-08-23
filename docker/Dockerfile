@@ -1,10 +1,21 @@
 FROM ubuntu/apache2:latest
 
+RUN apt-get update && \
+    apt-get install -y PHPIZE_DEPS &&\
+    apt-get install -y ca-certificates &&\
+    apt-get install -y curl &&\
+    apt-get install -y libedit2 &&\
+    apt-get install -y libsqlite3-0 &&\
+    apt-get install -y libxml2 &&\
+    apt-get install -y xz-utils &&\
+    rm -r /var/lib/apt/lists/*
+ENV PHP_INI_DIR=/usr/local/etc/php
+RUN mkdir -p $PHP_INI_DIR/conf.d
 
-
-
-# ENV APACHE_CONFDIR=/etc/apache2
-# ENV APACHE_ENVVARS=/etc/apache2/envvars
+ENV APACHE_CONFDIR=/etc/apache2
+ENV APACHE_ENVVARS=/etc/apache2/envvars
+RUN set -ex 		&& sed -r 's/^export ([^=]+)=(.*)$/: ${\1:=\2}\nexport \1/' "$APACHE_ENVVARS" 		&& . "$APACHE_ENVVARS" 	&& for dir in 		"$APACHE_LOCK_DIR" 		"$APACHE_RUN_DIR" 		"$APACHE_LOG_DIR" 		/var/www/html 	; do 		rm -rvf "$dir" 		&& mkdir -p "$dir" 		&& chown -R "$APACHE_RUN_USER:$APACHE_RUN_GROUP" "$dir"; 	done
+    
 # ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
 # ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
 
