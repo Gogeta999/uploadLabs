@@ -2,7 +2,9 @@ FROM chrometaro/php-apache:php52-apache22-jason
 
 
 ENV PHP_INI_DIR=/usr/local/etc/php
-RUN apt-get update && apt-get install -y apache2-bin apache2.2-common --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y apache2-bin apache2.2-common --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 ENV APACHE_CONFDIR=/etc/apache2
 ENV APACHE_ENVVARS=/etc/apache2/envvars
 ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
