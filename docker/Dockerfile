@@ -1,4 +1,4 @@
-FROM chrometaro/php-apache:php52-apache22-jason
+FROM httpd:2
 
 
 
