@@ -1,3 +1,5 @@
+FROM centos:centos5
+
 ENV PHP_VERSION 5.2.17
 
 # Initial setup
