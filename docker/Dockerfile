@@ -1,4 +1,4 @@
-FROM kuborgh/php-5.2:latest
+FROM mindk/php5.3.29-apache:latest
 
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
@@ -6,7 +6,7 @@ ENV TZ=Asia/Shanghai
 COPY . /tmp/
 
 # config apache && php
-RUN cp /tmp/docker-php.conf /etc/apache2ctl/conf-available/docker-php.conf &&\
+RUN cp /tmp/docker-php.conf /etc/apache2/conf-available/docker-php.conf &&\
     cp /tmp/php.ini /usr/local/etc/php/ &&\
     cp /tmp/php.ini /usr/local/etc/php/conf.d/
 
