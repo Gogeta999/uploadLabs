@@ -1,7 +1,11 @@
 FROM flandera/php5.2-apache:latest
 
+RUN apt-get update && apt-get install -y apache2-bin apache2.2-common --no-install-recommends && rm -rf /var/lib/apt/lists/*
+ENV PHP_INI_DIR=/usr/local/etc/php
 ENV APACHE_CONFDIR=/etc/apache2
 ENV APACHE_ENVVARS=/etc/apache2/envvars
+ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
+ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
 
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
