@@ -1,14 +1,28 @@
-FROM ubuntu/apache2:latest
+FROM ubuntu:12.04
 
-ENV PHP_INI_DIR=/usr/local/etc/php
-RUN mkdir -p $PHP_INI_DIR/conf.d
-# ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
-# ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
-ENV PHP_VERSION=5.2.17
-# ENV PHP_SHA256= PHP_MD5=
+# Install apache
 RUN apt-get update && \
-    apt-get install -y wget &&\
-RUN  cd /usr/local/etc/php && \
+    RUNLEVEL=1 apt-get install -y --no-install-recommends \
+        apache2 apache2-mpm-prefork apache2-utils apache2.2-bin apache2.2-common \
+        libapr1 libaprutil1 libaprutil1-dbd-sqlite3 libaprutil1-ldap \
+        libasn1-8-heimdal libcap2 libclass-isa-perl libexpat1 libgcrypt11 libgdbm3 \
+        libgnutls26 libgpg-error0 libgssapi3-heimdal libhcrypto4-heimdal \
+        libheimbase1-heimdal libheimntlm0-heimdal libhx509-5-heimdal \
+        libkrb5-26-heimdal libldap-2.4-2 libp11-kit0 libroken18-heimdal libsasl2-2 \
+        libsqlite3-0 libswitch-perl libtasn1-3 libwind0-heimdal mime-support perl \
+        perl-modules \
+    && \
+    apt-get clean && \
+    rm -Rf /var/lib/apt/lists/* && \
+    rm -Rf /var/cache/* && \
+    a2enmod rewrite && \
+    rm /etc/apache2/sites-enabled/000-default
+COPY 000-project.conf /etc/apache2/sites-enabled/
+
+# Download an build PHP 5.2.17
+# See https://askubuntu.com/questions/597462/how-to-install-php-5-2-x-on-ubuntu-14-04
+RUN mkdir /php && \
+    cd /php && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         apache2-prefork-dev autoconf binutils build-essential bzip2 ca-certificates \
@@ -144,6 +158,7 @@ RUN  cd /usr/local/etc/php && \
         --disable-embed \
         --with-apxs2=/usr/bin/apxs2 \
         --with-pic \
+        --enable-pcntl \
     && \
     make && \
     make install && \
@@ -245,6 +260,7 @@ RUN  cd /usr/local/etc/php && \
         --disable-cgi \
         --disable-embed \
         --with-pic \
+        --enable-pcntl \
     && \
     make clean && \
     make && \
@@ -292,17 +308,23 @@ RUN  cd /usr/local/etc/php && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+COPY php.ini /etc/php/apache2-php5.2/
+COPY php.ini /etc/php/cli-php5.2/
+
+ENV PHP_INI_DIR=/usr/local/etc/php
+RUN mkdir -p $PHP_INI_DIR/conf.d
+ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
+ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
+ENV PHP_VERSION=5.2.17
 
 
 ENV APACHE_CONFDIR=/etc/apache2
 ENV APACHE_ENVVARS=/etc/apache2/envvars
-# RUN set -ex 		&& sed -r 's/^export ([^=]+)=(.*)$/: ${\1:=\2}\nexport \1/' "$APACHE_ENVVARS" 		&& . "$APACHE_ENVVARS" 	&& for dir in 		"$APACHE_LOCK_DIR" 		"$APACHE_RUN_DIR" 		"$APACHE_LOG_DIR" 		/var/www/html 	; do 		rm -rvf "$dir" 		&& mkdir -p "$dir" 		&& chown -R "$APACHE_RUN_USER:$APACHE_RUN_GROUP" "$dir"; 	done
-# RUN set -ex 	&& . "$APACHE_ENVVARS" 	&& ln -sfT /dev/stderr "$APACHE_LOG_DIR/error.log" 	&& ln -sfT /dev/stdout "$APACHE_LOG_DIR/access.log" 	&& ln -sfT /dev/stdout "$APACHE_LOG_DIR/other_vhosts_access.log"
-# RUN { 		echo '<FilesMatch \.php$>'; 		echo '\tSetHandler application/x-httpd-php'; 		echo '</FilesMatch>'; 		echo; 		echo 'DirectoryIndex disabled'; 		echo 'DirectoryIndex index.php index.html'; 		echo; 		echo '<Directory /var/www/>'; 		echo '\tOptions -Indexes'; 		echo '\tAllowOverride All'; 		echo '</Directory>'; 	} | tee "$APACHE_CONFDIR/conf-available/docker-php.conf" 	&& a2enconf docker-php
 
 WORKDIR /var/www
 EXPOSE 80/tcp
-CMD ["apache2-foreground"]
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+# CMD ["apache2-foreground"]
 
 # ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
 # ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
