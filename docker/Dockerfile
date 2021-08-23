@@ -1,4 +1,4 @@
-FROM kaz29/php-5.2-apache:latest
+FROM sqlsec/php-5.2:latest
 
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
