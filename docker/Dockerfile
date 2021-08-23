@@ -6,7 +6,8 @@ RUN mkdir -p $PHP_INI_DIR/conf.d
 # ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
 ENV PHP_VERSION=5.2.17
 # ENV PHP_SHA256= PHP_MD5=
-
+RUN apt-get update && \
+    apt-get install -y wget &&\
 RUN  cd /usr/local/etc/php && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
