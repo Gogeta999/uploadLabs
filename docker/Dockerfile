@@ -2,13 +2,11 @@ FROM chrometaro/php-apache:php52-apache22-jason
 
 
 
-RUN apt-get update && \
-    apt-get install -y apache2-bin apache2.2-common --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
-ENV APACHE_CONFDIR=/etc/apache2
-ENV APACHE_ENVVARS=/etc/apache2/envvars
-ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
-ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
+
+# ENV APACHE_CONFDIR=/etc/apache2
+# ENV APACHE_ENVVARS=/etc/apache2/envvars
+# ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
+# ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
 
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
