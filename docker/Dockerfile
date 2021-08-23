@@ -1,7 +1,7 @@
 FROM chrometaro/php-apache:php52-apache22-jason
 
 
-ENV PHP_INI_DIR=/usr/local/etc/php
+
 RUN apt-get update && \
     apt-get install -y apache2-bin apache2.2-common --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
