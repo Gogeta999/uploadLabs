@@ -1,5 +1,6 @@
 FROM andres42/php5.2-apache2.2:latest
 
+ENV APACHE_CONFDIR=/etc/apache2
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
 
