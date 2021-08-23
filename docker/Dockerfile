@@ -1,5 +1,8 @@
 FROM flandera/php5.2-apache:latest
 
+ENV APACHE_CONFDIR=/etc/apache2
+ENV APACHE_ENVVARS=/etc/apache2/envvars
+
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
 
