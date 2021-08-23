@@ -7,8 +7,7 @@ RUN mkdir -p $PHP_INI_DIR/conf.d
 ENV PHP_VERSION=5.2.17
 # ENV PHP_SHA256= PHP_MD5=
 
-RUN mkdir /usr/local/etc/php && \
-    cd /usr/local/etc/php && \
+RUN  cd /usr/local/etc/php && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         apache2-prefork-dev autoconf binutils build-essential bzip2 ca-certificates \
