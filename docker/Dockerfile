@@ -1,4 +1,4 @@
-FROM httpd:2
+FROM ubuntu/apache2:latest
 
 
 
