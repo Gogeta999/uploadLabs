@@ -6,7 +6,7 @@ ENV TZ=Asia/Shanghai
 COPY . /tmp/
 
 # config apache && php
-RUN cp /tmp/docker-php.conf /etc/apache2/conf-available/docker-php.conf &&\
+RUN cp /tmp/docker-php.conf /etc/apache2ctl/conf-available/docker-php.conf &&\
     cp /tmp/php.ini /usr/local/etc/php/ &&\
     cp /tmp/php.ini /usr/local/etc/php/conf.d/
 
