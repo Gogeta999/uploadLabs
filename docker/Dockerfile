@@ -1,4 +1,4 @@
-FROM luismesalas/php-5.2-apache:latest
+FROM kaz29/php-5.2-apache:latest
 
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
