@@ -1,4 +1,4 @@
-FROM mindk/php5.3.29-apache:latest
+FROM luismesalas/php-5.2-apache:latest
 
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
