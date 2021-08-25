@@ -17,9 +17,12 @@ COPY . /tmp/
 
 # install git && php ext
 RUN apt-get update && \
-    apt-get install -y libgd-dev &&\
+    # apt-get install -y libgd-dev &&\
     apt-get install -y git &&\
     apt-get install -y vim &&\
+    apt-get install -y wget &&\
+    apt-get install -y sudo &&\
+    apt-get install -y bash &&\
     # docker-php-ext-install gd &&\
     # docker-php-ext-enable gd &&\
     # docker-php-ext-install exif &&\
