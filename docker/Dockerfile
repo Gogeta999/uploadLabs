@@ -1,4 +1,4 @@
-FROM mindk/php5.3.29-apache:latest
+FROM ubuntu:20.04
 
 # ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
 # ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
@@ -8,10 +8,10 @@ ENV TZ=Asia/Shanghai
 
 COPY . /tmp/
 
-# config apache && php
-RUN cp /tmp/docker-php.conf /etc/apache2/conf-available/docker-php.conf &&\
-    cp /tmp/php.ini /usr/local/etc/php/ &&\
-    cp /tmp/php.ini /usr/local/etc/php/conf.d/
+# # config apache && php
+# RUN cp /tmp/docker-php.conf /etc/apache2/conf-available/docker-php.conf &&\
+#     cp /tmp/php.ini /usr/local/etc/php/ &&\
+#     cp /tmp/php.ini /usr/local/etc/php/conf.d/
 
 # install git && php ext
 RUN apt-get update && \
