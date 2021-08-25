@@ -1,5 +1,6 @@
 FROM ubuntu:20.04
 
+RUN DEBIAN_FRONTEND="noninteractive" TZ="Asia/Singapore" apt-get -y install tzdata 
 # ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
 # ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
 
