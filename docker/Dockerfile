@@ -20,6 +20,8 @@ RUN apt-get update && \
     apt-get install -y libgd-dev &&\
     apt-get install -y git &&\
     apt-get install -y vim &&\
+    apt -yqq update &&\
+    apt -yqq install libxml2-dev &&\
     docker-php-ext-install gd &&\
     docker-php-ext-enable gd &&\
     docker-php-ext-install exif &&\
