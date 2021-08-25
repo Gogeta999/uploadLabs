@@ -25,11 +25,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # install upload-labs
-RUN cd /tmp/ &&\
-    git clone https://github.com/Gogeta999/uploadLabs.git &&\
-    rm -rf /var/wwww/html/* &&\
-    mv /tmp/uploadLabs/* /var/www/html/ &&\
-    chown www-data:www-data -R /var/www/html/ && \
-    rm -rf /tmp/*
+# RUN cd /tmp/ &&\
+#     git clone https://github.com/Gogeta999/uploadLabs.git &&\
+#     rm -rf /var/wwww/html/* &&\
+#     mv /tmp/uploadLabs/* /var/www/html/ &&\
+#     chown www-data:www-data -R /var/www/html/ && \
+#     rm -rf /tmp/*
 
 EXPOSE 80
