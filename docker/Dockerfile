@@ -1,11 +1,12 @@
 FROM ubuntu:20.04
+ENV LC_ALL C.UTF-8
+ENV TZ=Asia/Shanghai
+ARG DEBIAN_FRONTEND=noninteractive
 
-RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata 
 # ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
 # ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
 
-ENV LC_ALL C.UTF-8
-ENV TZ=Asia/Shanghai
+
 
 COPY . /tmp/
 
