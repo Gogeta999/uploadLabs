@@ -37,4 +37,4 @@ RUN apt-get update && \
 #     chown www-data:www-data -R /var/www/html/ && \
 #     rm -rf /tmp/*
 
-EXPOSE 80
+EXPOSE 9080
