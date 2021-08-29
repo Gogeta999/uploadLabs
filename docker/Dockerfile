@@ -23,7 +23,7 @@ RUN apt-get update && \
     apt-get install -y wget &&\
     apt-get install -y sudo &&\
     apt-get install -y bash &&\
-    apt-get install -y libxml2\
+    apt-get install -y libxml2 &&\
     apt-get install -y libcurl4
     # docker-php-ext-install gd &&\
     # docker-php-ext-enable gd &&\
