@@ -4,13 +4,6 @@ ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update &&\
-    apt-get install sudo &&\
-    sudo apt update &&\
-    sudo apt upgrade
-
-
-
 # ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
 # ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
 
@@ -25,17 +18,16 @@ RUN apt-get update &&\
 
 # install git && php ext
 RUN apt-get update && \
-    # apt-get install -y libgd-dev &&\
     apt-get install -y git &&\
     apt-get install -y vim &&\
     apt-get install -y wget &&\
     apt-get install -y sudo &&\
-    apt-get install -y bash &&\
+    apt-get install -y bash
     # docker-php-ext-install gd &&\
     # docker-php-ext-enable gd &&\
     # docker-php-ext-install exif &&\
     # docker-php-ext-enable exif &&\
-    rm -rf /var/lib/apt/lists/*
+    # rm -rf /var/lib/apt/lists/*
 
 # install upload-labs
 RUN cd /home/ &&\
