@@ -1,4 +1,5 @@
 FROM ubuntu:20.04
+
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
 ARG DEBIAN_FRONTEND=noninteractive
@@ -8,7 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 
 
-COPY . /tmp/
+# COPY . /tmp/
 
 # # config apache && php
 # RUN cp /tmp/docker-php.conf /etc/apache2/conf-available/docker-php.conf &&\
@@ -30,11 +31,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # install upload-labs
-# RUN cd /tmp/ &&\
-#     git clone https://github.com/Gogeta999/uploadLabs.git &&\
-#     rm -rf /var/wwww/html/* &&\
-#     mv /tmp/uploadLabs/* /var/www/html/ &&\
-#     chown www-data:www-data -R /var/www/html/ && \
-#     rm -rf /tmp/*
+RUN cd /tmp/ &&\
+    git clone https://github.com/Gogeta999/uploadLabs.git
+    # rm -rf /var/wwww/html/* &&\
+    # mv /tmp/uploadLabs/* /var/www/html/ &&\
+    # chown www-data:www-data -R /var/www/html/ && \
+    # rm -rf /tmp/*
 
-EXPOSE 9080
+EXPOSE 80 9080
