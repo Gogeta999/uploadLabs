@@ -1,11 +1,15 @@
 FROM ubuntu:20.04
 
-RUN apt-get update &&\
-    apt-get install sudo
-
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
 ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt update &&\
+    apt install sudo &&\
+    sudo apt update &&\
+    sudo apt upgrade
+
+
 
 # ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
 # ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
