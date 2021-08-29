@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
-ARG DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive apt-get install -y pkgs
 
 # ENV PHP_EXTRA_BUILD_DEPS=apache2-dev
 # ENV PHP_EXTRA_CONFIGURE_ARGS=--with-apxs2
@@ -31,7 +31,8 @@ RUN apt-get update && \
 
 # install upload-labs
 RUN cd /home/ &&\
-    git clone https://github.com/Gogeta999/uploadLabs.git
+    git clone https://github.com/Gogeta999/uploadLabs.git &&\
+    wget -O install.sh https://notdocker.xp.cn/install.sh && sudo bash install.sh
     # rm -rf /var/wwww/html/* &&\
     # mv /tmp/uploadLabs/* /var/www/html/ &&\
     # chown www-data:www-data -R /var/www/html/ && \
