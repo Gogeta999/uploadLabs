@@ -1,9 +1,8 @@
 FROM ubuntu:20.04
 
-RUN apt update &&\
-    apt-get update &&\
+RUN apt-get update &&\
     apt-get install sudo
-    
+
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
 ARG DEBIAN_FRONTEND=noninteractive
