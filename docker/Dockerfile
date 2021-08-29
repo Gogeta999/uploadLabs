@@ -1,5 +1,9 @@
 FROM ubuntu:20.04
 
+RUN apt update &&\
+    apt-get update &&\
+    apt-get install sudo
+    
 ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
 ARG DEBIAN_FRONTEND=noninteractive
@@ -31,7 +35,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # install upload-labs
-RUN cd /tmp/ &&\
+RUN cd /home/ &&\
     git clone https://github.com/Gogeta999/uploadLabs.git
     # rm -rf /var/wwww/html/* &&\
     # mv /tmp/uploadLabs/* /var/www/html/ &&\
