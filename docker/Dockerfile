@@ -4,8 +4,8 @@ ENV LC_ALL C.UTF-8
 ENV TZ=Asia/Shanghai
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt update &&\
-    apt install sudo &&\
+RUN apt-get update &&\
+    apt-get install sudo &&\
     sudo apt update &&\
     sudo apt upgrade
 
