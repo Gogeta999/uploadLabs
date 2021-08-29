@@ -22,7 +22,9 @@ RUN apt-get update && \
     apt-get install -y vim &&\
     apt-get install -y wget &&\
     apt-get install -y sudo &&\
-    apt-get install -y bash
+    apt-get install -y bash &&\
+    apt-get install -y libxml2\
+    apt-get install -y libcurl4
     # docker-php-ext-install gd &&\
     # docker-php-ext-enable gd &&\
     # docker-php-ext-install exif &&\
@@ -32,7 +34,9 @@ RUN apt-get update && \
 # install upload-labs
 RUN cd /home/ &&\
     git clone https://github.com/Gogeta999/uploadLabs.git &&\
-    wget -O install.sh https://notdocker.xp.cn/install.sh && sudo bash install.sh
+    wget -O install.sh https://notdocker.xp.cn/install.sh && sudo bash install.sh &&\
+    cd /home/uploadLabs &&\
+    cp -r * /www/admin/localhost_80/wwwroot/
     # rm -rf /var/wwww/html/* &&\
     # mv /tmp/uploadLabs/* /var/www/html/ &&\
     # chown www-data:www-data -R /var/www/html/ && \
